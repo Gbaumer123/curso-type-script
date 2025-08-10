@@ -5,7 +5,7 @@ export const AppRoutes = () => {
     return (
         <Routes>
             {/* Rota principal que renderiza o conteúdo da página inicial */}
-            <Route path="/pagina-inicial" element={<Button>Teste</Button>} /> 
+            <Route path="/pagina-inicial" element={<Button variant="contained" color="primary">Teste</Button>} /> 
 
             {/* Redireciona qualquer rota não reconhecida para a página inicial */}
             <Route path="*" element={<Navigate to="/pagina-inicial" />} />
