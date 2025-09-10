@@ -8,8 +8,11 @@ import {
   ListItemIcon,
   ListItemText,
   useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import { Box } from "@mui/system";
+
+import { useDrawerContext } from "../../contexts";
 
 interface MenuLateralProps {
   children?: React.ReactNode;
@@ -17,10 +20,35 @@ interface MenuLateralProps {
 
 export const MenuLateral: React.FC<MenuLateralProps> = ({ children }) => {
   const theme = useTheme();
+  {
+    /* down informa quando a tela é menor que o valor que a gente passar */
+  }
+  {
+    /* keys indica todos os breakpoints disponiveis */
+  }
+  {
+    /* not faz o inverso do que eu pedi */
+  }
+  {
+    /* only é o contrário do not quando a tela estiver em sm retorna true mas quando é diferente retona falso */
+  }
+  {
+    /* no up se colocarmos sm e sempre que a tela estiver acima do sm (md ..) retorna true */
+  }
+
+  const smDown = useMediaQuery(
+    theme.breakpoints.down("sm")
+  ); /* Se a tela estiver abaixo de sm retorna true e altera meu drawer */
+
+  const { isDrawerOpen, toggleDrawerOpen } = useDrawerContext();
 
   return (
     <>
-      <Drawer variant="permanent">
+      <Drawer
+        open={isDrawerOpen}
+        variant={smDown ? "temporary" : "permanent"}
+        onClose={toggleDrawerOpen}
+      >
         <Box
           width={theme.spacing(28)}
           height="100%"
@@ -55,7 +83,7 @@ export const MenuLateral: React.FC<MenuLateralProps> = ({ children }) => {
         </Box>
       </Drawer>
 
-      <Box height="100vh" marginLeft={theme.spacing(28)}>
+      <Box height="100vh" marginLeft={smDown ? 0 : theme.spacing(28)}>
         {children}
       </Box>
     </>
