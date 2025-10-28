@@ -17,9 +17,21 @@ interface IFerramentasDeDetalheProps {
   aoClicarEmSalvarEFechar?: () => void; //função chamada quando clica no botao
 }
 
-export const FerramentasDeDetalhe: React.FC<
-  IFerramentasDeDetalheProps
-> = ({}) => {
+export const FerramentasDeDetalhe: React.FC<IFerramentasDeDetalheProps> = ({
+  textoBotaoNovo = "Novo",
+
+  mostrarBotaoNovo = true,
+  mostrarBotaoVoltar = true,
+  mostrarBotaoApagar = true,
+  mostrarBotaoSalvar = true,
+  mostrarBotaoSalvarEFechar = false,
+
+  aoClicarEmNovo,
+  aoClicarEmVoltar,
+  aoClicarEmApagar,
+  aoClicarEmSalvar,
+  aoClicarEmSalvarEFechar,
+}) => {
   const theme = useTheme();
 
   return (
@@ -33,52 +45,67 @@ export const FerramentasDeDetalhe: React.FC<
       height={theme.spacing(5)} //altura da barra de ferramentas
       component={Paper} //   para colocar a barra com o efeito de papel
     >
-      <Button
-        color="primary" // cor do botao
-        disableElevation // remove a sombra do botao
-        variant="contained" // tipo do botao
-        startIcon={<Icon>save</Icon>} // icone do botao
-      >
-        Salvar
-      </Button>
+      {mostrarBotaoSalvar && (
+        <Button
+          color="primary" // cor do botao
+          disableElevation // remove a sombra do botao
+          variant="contained" // tipo do botao
+          onClick={aoClicarEmSalvar}
+          startIcon={<Icon>save</Icon>} // icone do botao
+        >
+          Salvar
+        </Button>
+      )}
 
-      <Button
-        color="primary" // cor do botao
-        disableElevation // remove a sombra do botao
-        variant="outlined" // tipo do botao
-        startIcon={<Icon>save</Icon>} // icone do botao
-      >
-        Salvar e voltar
-      </Button>
+      {mostrarBotaoSalvarEFechar && (
+        <Button
+          color="primary" // cor do botao
+          disableElevation // remove a sombra do botao
+          variant="outlined" // tipo do botao
+          onClick={aoClicarEmSalvarEFechar}
+          startIcon={<Icon>save</Icon>} // icone do botao
+        >
+          Salvar e voltar
+        </Button>
+      )}
 
-      <Button
-        color="primary" // cor do botao
-        disableElevation // remove a sombra do botao
-        variant="outlined" // tipo do botao
-        startIcon={<Icon>delete</Icon>} // icone do botao
-      >
-        Apagar
-      </Button>
+      {mostrarBotaoApagar && (
+        <Button
+          color="primary" // cor do botao
+          disableElevation // remove a sombra do botao
+          variant="outlined" // tipo do botao
+          onClick={aoClicarEmApagar}
+          startIcon={<Icon>delete</Icon>} // icone do botao
+        >
+          Apagar
+        </Button>
+      )}
 
-      <Button
-        color="primary" // cor do botao
-        disableElevation // remove a sombra do botao
-        variant="outlined" // tipo do botao
-        startIcon={<Icon>add</Icon>} // icone do botao
-      >
-        Adicionar
-      </Button>
+      {mostrarBotaoNovo && (
+        <Button
+          color="primary" // cor do botao
+          disableElevation // remove a sombra do botao
+          variant="outlined" // tipo do botao
+          onClick={aoClicarEmNovo}
+          startIcon={<Icon>add</Icon>} // icone do botao
+        >
+          {textoBotaoNovo}
+        </Button>
+      )}
 
       <Divider variant="middle" orientation="vertical" />
 
-      <Button
-        color="primary" // cor do botao
-        disableElevation // remove a sombra do botao
-        variant="outlined" // tipo do botao
-        startIcon={<Icon>arrow_back</Icon>} // icone do botao
-      >
-        Voltar
-      </Button>
+      {mostrarBotaoVoltar && (
+        <Button
+          color="primary" // cor do botao
+          disableElevation // remove a sombra do botao
+          variant="outlined" // tipo do botao
+          onClick={aoClicarEmVoltar}
+          startIcon={<Icon>arrow_back</Icon>} // icone do botao
+        >
+          Voltar
+        </Button>
+      )}
     </Box>
   );
 };
